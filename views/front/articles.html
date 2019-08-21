@@ -1,0 +1,17 @@
+{{ define "front/articles.html" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    文章列表
+    {{ range .articles }}
+    <tr>
+        <td>{{ . }}</td>
+    </tr>
+    {{ end }}
+</body>
+</html>
+{{ end }}
