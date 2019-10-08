@@ -6,7 +6,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"gopkg.in/ini.v1"
 	"os"
+	_ "asablog/info"
 )
+
+
 
 func main() {
 
@@ -39,3 +42,4 @@ func main() {
 	router.Run(http_port)
 
 }
+

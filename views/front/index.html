@@ -1,12 +1,107 @@
-{{ define "front/index.html" }}
+{[{ define "front/index.html" }]}
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <title>Black &amp; White</title>
+
+    <!-- meta -->
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- css -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="/static/css/pace.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+
+    <!-- js -->
+    <script src="/static/js/jquery-2.1.3.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/pace.min.js"></script>
+    <script src="/static/js/modernizr.custom.js"></script>
 </head>
+
 <body>
-    smile
+<div class="container">
+    {[{ template "layouts/front_header.html" . }]}
+</div>
+
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-8">
+                {[{ range .articles}]}
+                <article class="post post-1">
+                    <header class="entry-header">
+                        <h1 class="entry-title">
+                            <a href="/articles/single?id={[{ .Id }]}">{[{ .Title }]}</a>
+                        </h1>
+                        <div class="entry-meta">
+                            <span class="post-category"><a href="#">Zhanmei 博客</a></span>
+                            <span class="post-date"><a href="#"><time class="entry-date"
+                                                                      datetime="2012-11-09T23:15:57+00:00">{[{ .Created_at }]}</time></a></span>
+                            <span class="views-count"><a href="#">{[{ .Count}]} 阅读</a></span>
+                        </div>
+                    </header>
+                    <div class="entry-content clearfix">
+                        <p>{[{ .Introduce}]}</p>
+                        <div class="read-more cl-effect-14">
+                            <a href="/articles/single?id={[{ .Id }]}" class="more-link">继续阅读 <span class="meta-nav">→</span></a>
+                        </div>
+                    </div>
+                </article>
+
+                {[{ end }]}
+                <div class="pagination-simple">
+                    <a class="page-prev" href="?page={[{ .prev }]}">上一页</a>
+                    <span class="current">第 {[{ .page }]} 页 / 共 {[{ .totalPage }]} 页</span>
+                    <a class="page-next" href="?page={[{ .next }]}">下一页</a>
+                </div>
+
+
+            </main>
+            <aside class="col-md-4">
+                <div class="widget widget-recent-posts">
+                    <h3 class="widget-title">推荐文章</h3>
+                    <ul>
+                        <li>
+                            <a target="_blank" href="https://www.cnblogs.com/geaozhang/p/6839297.html">Mysql开发面试题</a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://books.studygolang.com/gopl-zh/index.html">GO语言圣经</a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="http://gorm.io/docs/">GORM文档</a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+
+{[{ template "layouts/front_footer.html" . }]}
+<!-- Mobile Menu -->
+<div class="overlay overlay-hugeinc">
+    <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+    <nav>
+        <ul>
+            <li><a href="/">首页</a></li>
+            <li><a href="/articles/index?type=1">PHP</a></li>
+            <li><a href="/articles/index?type=2">GO</a></li>
+            <li><a href="/articles/index?type=3">算法</a></li>
+            <li><a href="/articles/index?type=4">Linux</a></li>
+            <li><a href="/articles/index?type=5">JS</a></li>
+            <li><a href="about">关于</a></li>
+        </ul>
+    </nav>
+</div>
+
+<script src="/static/js/script.js"></script>
+
 </body>
 </html>
-{{ end }}
+
+
+{[{ end }]}

@@ -1,0 +1,67 @@
+{[{ define "bak/login.html" }]}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script src="/static/js/vue.js"></script>
+    <script src="/static/js/vue-resource.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/xadmin.css">
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/js/xadmin.js"></script>
+</head>
+<body class="login-bg">
+
+<div id="box" class="login layui-anim layui-anim-up">
+    <div class="message">管理登录</div>
+    <div id="darkbannerwrap"></div>
+
+    <form method="post" class="layui-form" >
+        <input name="username" v-model="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+        <hr class="hr15">
+        <input name="password" v-model="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+        <hr class="hr15">
+        <input value="登录" @click="userLogin()" lay-submit lay-filter="login" style="width:100%;" type="submit">
+        <hr class="hr20" >
+    </form>
+</div>
+<script>
+    window.onload = function(){
+        var vm = new Vue({
+            el:'#box',
+            data:{
+                username:'',
+                password:'',
+            },
+            methods:{
+                userLogin:function(){
+                    //发送 post 请求
+                    this.$http.post('/api/admin/login',{username:this.username,password:this.password}).then(function(res){
+                        document.cookie="atoken="+res.body.data.token;
+                        alert("登录成功！")
+                        window.location.href = "/admin"
+                    },function(res){
+                        alert(res.body.message)
+                    });
+                }
+            }
+        });
+    }
+</script>
+<!-- 底部结束 -->
+<script>
+    //百度统计可去掉
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</body>
+</html>
+{[{end}]}
