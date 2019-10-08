@@ -19,6 +19,10 @@
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <link rel="stylesheet" href="/static/editor.md/css/style.css" />
+    <link rel="stylesheet" href="/static/editor.md/css/editormd.css" />
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
 </head>
 
 <body class="layui-anim layui-anim-up">
@@ -76,14 +80,6 @@
                     <textarea placeholder="请输入内容" id="" name="introduce" class="layui-textarea">{[{ .article.Introduce}]}</textarea>
                 </div>
             </div>
-            <div class="layui-form-item layui-form-text">
-                <label for="desc" class="layui-form-label">
-                    内容
-                </label>
-                <div class="layui-input-block">
-                    <textarea placeholder="请输入内容" id="desc" name="content" class="layui-textarea">{[{ .article.Content}]}</textarea>
-                </div>
-            </div>
             <div class="layui-form-item">
                 <label for="" class="layui-form-label">
                     <span class="x-red">*</span>状态
@@ -104,6 +100,31 @@
                     保存
                 </button>
             </div>
+            <label for="desc" class="layui-form-label">
+                内容
+            </label>
+            <div id="test-editormd">
+                <textarea id="desc" name="content" style="display:none;">{[{ .article.Content}]}</textarea>
+            </div>
+            <script src="/static/editor.md/editormd.js"></script>
+            <script type="text/javascript">
+                var testEditor;
+
+                $(function() {
+                    // You can custom @link base url.
+                    editormd.urls.atLinkBase = "https://github.com/";
+
+                    testEditor = editormd("test-editormd", {
+                        width     : "90%",
+                        height    : 720,
+                        toc       : true,
+                        //atLink    : false,    // disable @link
+                        //emailLink : false,    // disable email address auto link
+                        todoList  : true,
+                        path      : '/static/editor.md/lib/'
+                    });
+                });
+            </script>
         </form>
     </div>
 </div>
