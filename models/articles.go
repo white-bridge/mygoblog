@@ -1,8 +1,6 @@
 package models
 
-import (
-	"time"
-)
+import "time"
 
 type Articles struct {
 	Id int               `json:"id,string"`
@@ -14,8 +12,8 @@ type Articles struct {
 	Check_status int     `json:"check_status,string"`
 	Introduce string	 `json:"introduce"`
 	Publish_time int
-	Created_at string
-	Updated_at string
+	Created_at time.Time
+	Updated_at time.Time
 	Isdel int            `json:"isdel,string"`
 }
 
@@ -51,8 +49,6 @@ func (_ *Articles) ListCondition(limit,offset int,arg map[string]interface{}) []
 
 // 返回数据插入成功后的ID
 func (_ *Articles) Insert(a *Articles) int {
-	a.Created_at = time.Now().Format("2006-01-02 15:04:05")
-	a.Updated_at = time.Now().Format("2006-01-02 15:04:05")
 	orm.Create(a)
 	return a.Id
 }

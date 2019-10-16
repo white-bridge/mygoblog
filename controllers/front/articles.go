@@ -54,6 +54,9 @@ func (a *Articles) Single(c *gin.Context)  {
 	id,_ := strconv.Atoi(c.Query("id"))
 	articleModel := new(models.Articles)
 	article := articleModel.First(id)
+	//阅读数加一
+	article.Count = article.Count + 1
+	articleModel.Edit(articleModel)
 	unsafe := blackfriday.Run([]byte(article.Content))
 	article.Content = string(bluemonday.UGCPolicy().SanitizeBytes(unsafe))
 	c.HTML(http.StatusOK,"front/single.html",gin.H{"article":article})
