@@ -4,9 +4,9 @@ import (
 	"asablog/routers"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"gopkg.in/ini.v1"
 	"os"
 	_ "asablog/info"
+	"github.com/go-ini/ini"
 )
 
 
@@ -40,6 +40,5 @@ func main() {
 	http_port := config.Section("").Key("http_port").String()
 
 	router.Run(http_port)
-
 }
 
